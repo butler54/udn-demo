@@ -23,6 +23,7 @@ clusterGroup:
     - hello-world
     - prod
     - dev
+    - networks
   # Explicitly mention the cluster-state based overrides we plan to use for this pattern.
   # We can use self-referential variables because the chart calls the tpl function with these variables defined
   sharedValueFiles:
@@ -82,7 +83,12 @@ clusterGroup:
       namespace: default
       project: hub
       path: charts/all/cluster-config
-    
+    networks:
+      name: networks
+      namespace: networks
+      project: hub
+      path: charts/all/networks
+
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
     # The default schedule is every 10 minutes: imperative.schedule
