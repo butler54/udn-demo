@@ -7,15 +7,22 @@ clusterGroup:
     - golang-external-secrets
     - config-demo
     - hello-world
+    - prod
+    - dev
   subscriptions:
     acm:
       name: advanced-cluster-management
       namespace: open-cluster-management
       channel: release-2.12
+    coo:
+      name: cluster-observability-operator
+      channel: development
   projects:
     - hub
     - config-demo
     - hello-world
+    - prod
+    - dev
   # Explicitly mention the cluster-state based overrides we plan to use for this pattern.
   # We can use self-referential variables because the chart calls the tpl function with these variables defined
   sharedValueFiles:
@@ -70,6 +77,12 @@ clusterGroup:
       namespace: hello-world
       project: hello-world
       path: charts/all/hello-world
+    cluster-config:
+      name: cluster-config
+      namespace: default
+      project: hub
+      path: charts/all/cluster-config
+    
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
     # The default schedule is every 10 minutes: imperative.schedule

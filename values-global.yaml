@@ -1,6 +1,6 @@
 ---
 global:
-  pattern: multicloud-gitops
+  pattern: udn-demo
   options:
     useCSV: false
     syncPolicy: Automatic
