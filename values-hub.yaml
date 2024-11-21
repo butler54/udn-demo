@@ -19,6 +19,12 @@ clusterGroup:
     coo:
       name: cluster-observability-operator
       channel: development
+    loki:
+      name:
+      channel:
+    netobserv:
+      name:
+      channel:
   projects:
   - hub
   - config-demo
