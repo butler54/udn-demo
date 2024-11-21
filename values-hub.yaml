@@ -10,7 +10,7 @@ clusterGroup:
   - prod
   - dev
   - layertwo
-  - netobserv
+  - openshift-netobserv-operator
   subscriptions:
     acm:
       name: advanced-cluster-management
@@ -20,11 +20,11 @@ clusterGroup:
       name: cluster-observability-operator
       channel: development
     loki:
-      name:
-      channel:
+      name: loki-operator
+      channel: stable-6.1
     netobserv:
-      name:
-      channel:
+      name: netobserv-operator
+      channel: stable
   projects:
   - hub
   - config-demo
