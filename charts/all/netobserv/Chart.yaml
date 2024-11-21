@@ -2,5 +2,5 @@ apiVersion: v2
 description: A Helm chart to provide MVP configuration of the cluster
 keywords:
 - pattern
-name: networks
+name: netobserv
 version: 0.0.1

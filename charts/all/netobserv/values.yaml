@@ -13,4 +13,4 @@ awssecret:
 # bucket region 
 s3:
   region: ap-southeast-1
-  bucket: jackpoint
+  bucket: backup-t5qrc
