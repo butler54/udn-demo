@@ -96,6 +96,11 @@ clusterGroup:
       namespace: networks
       project: hub
       path: charts/all/networks
+    techpreview:
+      name: techpreview
+      namespace: default
+      project: hub
+      path: charts/all/techpreview
 
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
