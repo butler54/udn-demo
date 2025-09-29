@@ -1,0 +1,1 @@
+oc label node master-0 k8s.ovn.org/egress-assignable=""
