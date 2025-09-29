@@ -14,6 +14,16 @@ clusterGroup:
   - cert-manager
   - openshift-storage
   - openshift-nfd
+  - openshift-nmstate
+  - metallb-system:
+      operatorGroup: true
+      targetNamespaces:
+  - udn-foo:
+      labels:
+        k8s.ovn.org/primary-user-defined-network: ""
+  - udn-bar:
+      labels:
+        k8s.ovn.org/primary-user-defined-network: ""
   subscriptions:
     # ACM is kept anticipating 
     acm:
@@ -39,7 +49,10 @@ clusterGroup:
       namespace: openshift-operators
       channel: alpha
       source: certified-operators
-
+    metallb:
+      name: metallb-operator
+      namespace: metallb-system
+      channel: stable
   projects:
   - hub
   - vault
@@ -79,7 +92,12 @@ clusterGroup:
       namespace: openshift-storage
       project: hub
       path: charts/hub/lvm-storage
- 
+
+    metallb:
+      name: metallb
+      namespace: metallb-system
+      project: default
+      path: charts/all/metallb
 
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
