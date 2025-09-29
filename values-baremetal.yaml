@@ -111,8 +111,8 @@ clusterGroup:
       playbook: ansible/enable-multinetworkpolicies.yaml
       verbosity: -vvv
       timeout: 1800
-    - name: set-default-storage-class
-      playbook: ansible/set-default-storage-class.yaml
-      verbosity: -vvv
-      timeout: 1800
+    # - name: set-default-storage-class
+    #   playbook: ansible/set-default-storage-class.yaml
+    #   verbosity: -vvv
+    #   timeout: 1800
     
