@@ -104,16 +104,16 @@ clusterGroup:
       namespace: metallb-system
       project: default
       path: charts/all/metallb
-      udn:
-        name: udn
-        namespace: udn-foobar
-        project: hub
-        path: charts/all/udn
-      delayed:
-        name: delayed
-        namespace: udn-foobar
-        project: hub
-        path: charts/delayed/udn-workloads
+    udn:
+      name: udn
+      namespace: udn-foobar
+      project: hub
+      path: charts/all/udn
+    delayed:
+      name: delayed
+      namespace: udn-foobar
+      project: hub
+      path: charts/delayed/udn-workloads
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
     # The default schedule is every 10 minutes: imperative.schedule
