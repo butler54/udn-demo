@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: hello-foo
+  name: hello-foo
+  namespace: udn-foo
+spec:
+  containers:
+  - name: hello-openshift
+    image: quay.io/openshift/origin-hello-openshift
+    ports:
+    - containerPort: 8888
+    imagePullPolicy: IfNotPresent
