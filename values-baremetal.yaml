@@ -21,12 +21,15 @@ clusterGroup:
   - udn-foo:
       labels:
         k8s.ovn.org/primary-user-defined-network: ""
+        name: udn-foo
   - udn-bar:
       labels:
         k8s.ovn.org/primary-user-defined-network: ""
+        name: udn-bar
   - udn-foobar:
       labels:
         k8s.ovn.org/primary-user-defined-network: ""
+        name: udn-foobar
   subscriptions:
     # ACM is kept anticipating 
     acm:

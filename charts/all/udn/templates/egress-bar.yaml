@@ -1,0 +1,10 @@
+apiVersion: k8s.ovn.org/v1
+kind: EgressIP
+metadata:
+  name: egress-bar
+spec:
+  egressIPs: 
+  - 172.25.49.101
+  namespaceSelector:
+      matchLabels:
+        name: udn-bar
