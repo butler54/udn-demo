@@ -111,10 +111,12 @@ clusterGroup:
       playbook: ansible/install-deps.yaml
       verbosity: -vvv
       timeout: 3600
-    - name: networks
-      playbook: ansible/enable-multinetworkpolicies.yaml
-      verbosity: -vvv
-      timeout: 1800
+    # Use the script instead
+    # - name: networks
+    #   playbook: ansible/enable-multinetworkpolicies.yaml
+    #   verbosity: -vvv
+    #   timeout: 1800
+    # this doesn't work (permissions?)
     # - name: set-default-storage-class
     #   playbook: ansible/set-default-storage-class.yaml
     #   verbosity: -vvv
