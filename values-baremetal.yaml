@@ -24,6 +24,9 @@ clusterGroup:
   - udn-bar:
       labels:
         k8s.ovn.org/primary-user-defined-network: ""
+  - udn-foobar:
+      labels:
+        k8s.ovn.org/primary-user-defined-network: ""
   subscriptions:
     # ACM is kept anticipating 
     acm:
@@ -98,7 +101,11 @@ clusterGroup:
       namespace: metallb-system
       project: default
       path: charts/all/metallb
-
+    udn:
+      name: udn
+      namespace: udn-foobar
+      project: hub
+      path: charts/all/udn
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
     # The default schedule is every 10 minutes: imperative.schedule
