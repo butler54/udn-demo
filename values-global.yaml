@@ -1,0 +1,26 @@
+global:
+  pattern: udn-demo
+  options:
+    useCSV: false
+    syncPolicy: Automatic
+    installPlanApproval: Automatic
+    autoApproveManualInstallPlans: true
+  # This defines whether or not to use upstream resources for CoCo.
+  # Defines whether or not the hub cluster can be used for confidential containers
+  coco:
+    azure:
+      defaultVMFlavour: "Standard_DC2as_v5"
+      VMFlavours: "Standard_DC2as_v5,Standard_DC4as_v5,Standard_DC8as_v5,Standard_DC16as_v5"
+main:
+  # WARNING
+  # This default configuration uses a single cluster on azure.
+  # It fundamentally violates the separation of duties.
+  clusterGroupName: baremetal
+  multiSourceConfig:
+    enabled: true
+    clusterGroupChartVersion: 0.9.*
+
+# Common secret store configuration used across multiple charts
+secretStore:
+  name: vault-backend
+  kind: ClusterSecretStore

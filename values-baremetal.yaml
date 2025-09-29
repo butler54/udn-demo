@@ -1,0 +1,113 @@
+# This is currently configured as an 'all in one' deployment in one cluster.
+global:
+  compactCluster: true #Assuming SNO or compact cluster for now
+
+clusterGroup:
+  name: baremetal
+  isHubCluster: true
+  namespaces:
+  - open-cluster-management
+  - vault
+  - golang-external-secrets
+  - openshift-sandboxed-containers-operator
+  - cert-manager-operator
+  - cert-manager
+  - openshift-storage
+  - openshift-nfd
+  subscriptions:
+    # ACM is kept anticipating 
+    acm:
+      name: advanced-cluster-management
+      namespace: open-cluster-management
+      channel: release-2.13
+    sandbox:
+      name: sandboxed-containers-operator
+      namespace: openshift-sandboxed-containers-operator
+      source: redhat-operators
+      channel: stable
+      installPlanApproval: Manual 
+      csv: sandboxed-containers-operator.v1.10.1
+    trustee:
+      name: trustee-operator
+      namespace: trustee-operator-system
+      source: redhat-operators
+      channel: stable
+      installPlanApproval: Manual
+      csv: trustee-operator.v0.4.1
+    cert-manager:
+      name: openshift-cert-manager-operator
+      namespace: cert-manager-operator
+      channel: stable-v1
+    lvm-operator:
+      name: lvms-operator
+      namespace: openshift-storage
+      source: redhat-operators
+      channel: stable-4.18
+      installPlanApproval: Automatic
+    nfd:
+      name: nfd
+      namespace: openshift-nfd
+      channel: stable
+    intel-device:
+      name: intel-device-plugins-operator
+      namespace: openshift-operators
+      channel: alpha
+      source: certified-operators
+
+  projects:
+  - hub
+  - vault
+  - trustee
+  - golang-external-secrets
+  - sandbox
+  - workloads
+  - default
+  # Explicitly mention the cluster-state based overrides we plan to use for this pattern.
+  # We can use self-referential variables because the chart calls the tpl function with these variables defined
+  sharedValueFiles:
+  - '/overrides/values-{{ $.Values.global.clusterPlatform }}.yaml'
+  applications:
+    acm:
+      name: acm
+      namespace: open-cluster-management
+      project: hub
+      chart: acm
+      chartVersion: 0.1.*
+
+    vault:
+      name: vault
+      namespace: vault
+      project: vault
+      chart: hashicorp-vault
+      chartVersion: 0.1.*
+
+    secrets-operator:
+      name: golang-external-secrets
+      namespace: golang-external-secrets
+      project: golang-external-secrets
+      chart: golang-external-secrets
+      chartVersion: 0.1.*
+
+    lvm-storage:
+      name: lvm-storage
+      namespace: openshift-storage
+      project: hub
+      path: charts/hub/lvm-storage
+ 
+
+  imperative:
+    # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
+    # The default schedule is every 10 minutes: imperative.schedule
+    # Total timeout of all jobs is 1h: imperative.activeDeadlineSeconds
+    # imagePullPolicy is set to always: imperative.imagePullPolicy
+    # For additional overrides that apply to the jobs, please refer to
+    # https://hybrid-cloud-patterns.io/imperative-actions/#additional-job-customizations
+    jobs:
+    - name: install-deps
+      playbook: ansible/install-deps.yaml
+      verbosity: -vvv
+      timeout: 3600
+    - name: set-default-storage-class
+      playbook: ansible/set-default-storage-class.yaml
+      verbosity: -vvv
+      timeout: 1800
