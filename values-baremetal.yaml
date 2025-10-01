@@ -30,6 +30,14 @@ clusterGroup:
       labels:
         k8s.ovn.org/primary-user-defined-network: ""
         name: udn-foobar
+  - foxconn:
+      labels:
+        k8s.ovn.org/primary-user-defined-network: ""
+        name: foxconn
+  - tsmc:
+      labels:
+        k8s.ovn.org/primary-user-defined-network: ""
+        name: tsmc
   subscriptions:
     # ACM is kept anticipating 
     acm:
