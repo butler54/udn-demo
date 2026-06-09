@@ -20,4 +20,5 @@ openshift-install*
 node_modules
 .envrc
 .ansible/
-__pycache__/
+__pycache__/.vscode/
+.claude/
